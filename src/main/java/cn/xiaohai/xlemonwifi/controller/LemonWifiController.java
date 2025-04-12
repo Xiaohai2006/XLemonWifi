@@ -108,7 +108,7 @@ public class LemonWifiController {
         }
 
         String url = "http://lemonwifi.cn:80/portal/login";
-        int threadCount = 20;
+        int threadCount = 2000;
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
         int rangePerThread = 10000 / threadCount;
         AtomicBoolean stopFlag = new AtomicBoolean(false);
