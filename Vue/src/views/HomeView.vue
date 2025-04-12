@@ -97,7 +97,6 @@ export default {
     },
 
     postapi() {
-      this.$refs.searchBox.blur();
       const loading = ElLoading.service({
         lock: true,
         text: '正在处理您的请求，请稍候...',
