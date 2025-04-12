@@ -145,8 +145,19 @@ export default {
               console.error('解析失败:', e);
               ElMessage.error('服务器返回了错误格式');
             }
-          } else {
+          } else if (xhr.status === 0) 
+          {
+            loading.close();
 
+            ElMessageBox.alert('验证码获取失败 验证码可能失效请先获取验证码一次验证码 再来我这里进行爆破QWQ！！！ 你也可以再次尝试选择 让我们代替您发送', '获取失败', {
+                confirmButtonText: 'OK',
+                
+                
+            })
+          }
+          else
+          {
+            loading.close();
             console.error('请求失败，状态码:', xhr.status);
             ElMessage.error('请求失败，请检查网络连接');
           }
