@@ -50,7 +50,8 @@ public class LemonWifiPasswordCracker implements Runnable {
 
                     int responseCode = con.getResponseCode();
                     if (responseCode == 403) {
-                        System.out.println("找到验证码: " + password);
+                        System.out.println("手机号" + username + "找到验证码: " + password);
+
                         foundPassword.set(password);
                         stopFlag.set(true);
                         return;

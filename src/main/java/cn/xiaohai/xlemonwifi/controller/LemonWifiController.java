@@ -31,6 +31,8 @@ public class LemonWifiController {
 
         String username = request.getPhone();
 
+        System.out.println("手机号: " + username);
+
         if (request.isYanz()) {
             //发送给验证码  https://lemonwifi.cn/portal/verification.ajax
             //POST请求方式
@@ -94,11 +96,14 @@ public class LemonWifiController {
 
                 } else {
                     System.err.println("响应码: " + responseCode);
+                    System.out.println("手机号: " + username + " 验证码发送失败");
                     return Result.error("验证码发送失败（响应码错误）");
+
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
+                System.out.println("手机号: " + username + " 验证码发送失败有异常");
                 return Result.error("验证码发送失败（异常）");
             }
 
@@ -138,6 +143,7 @@ public class LemonWifiController {
         if (foundPassword.get() != null) {
             return Result.success(foundPassword.get());
         } else {
+            System.out.println("手机号: " + username + " 未找到密码");
             return Result.error("未找到密码");
         }
     }

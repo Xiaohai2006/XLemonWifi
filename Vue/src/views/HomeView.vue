@@ -7,7 +7,15 @@
         @enter="handlePost"
       />
       <button class="get-button" @click="handlePost" v-if="isMobile">获取</button>
+      <div class="hitokoto">{{ hitokoto }}</div>
     </div>
+    
+
+    <div class="footer">
+        开源地址：
+        <a href="https://github.com/Xiaohai2006/XLemonWifi" target="_blank">Xiaohai2006/XLemonWifi</a>
+    </div>
+
   </div>
 </template>
 
@@ -26,6 +34,7 @@ export default {
     return {
       phoneNumber: '',
       isMobile: false,
+      hitokoto: '正在加载一言...',
     };
   },
   watch: {
@@ -35,6 +44,7 @@ export default {
   },
   mounted() {
     this.checkIfMobile();
+    this.fetchHitokoto();
     console.log('HomeView mounted, phoneNumber:', this.phoneNumber);
   },
   methods: {
@@ -171,9 +181,21 @@ export default {
         yanz: this.isMobile,
       };
       xhr.send(JSON.stringify(data));
-    }
+    },
+
+    fetchHitokoto() {
+        fetch('https://v1.hitokoto.cn?encode=text')
+        .then(response => response.text())
+        .then(text => {
+            this.hitokoto = `${text}`;
+        })
+        .catch(() => {
+            this.hitokoto = '可爱的喵喵~';
+        });
+    },
 
   },
+  
 };
 </script>
 
@@ -187,8 +209,10 @@ export default {
 
 .search-box {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
+
 
 .get-button {
   margin-left: 10px;
@@ -205,4 +229,33 @@ export default {
 .get-button:hover {
   background-color: #0056b3;
 }
+
+.footer {
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  width: 100%;
+}
+
+.footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.hitokoto {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+}
+
+
+
 </style>
