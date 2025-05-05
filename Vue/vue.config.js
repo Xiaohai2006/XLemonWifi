@@ -7,8 +7,14 @@ module.exports = defineConfig({
         ],
         proxy: {
             '/api': {
-              target: 'http://cl.xiaohai2006.cn:9113',
-              changeOrigin: true
+              target: 'https://wifi.api.yhhrun.cn:86',
+              changeOrigin: true,
+              pathRewrite: { '^/api': '' },
+            },
+            '/proxy': {
+              target: 'https://api.ilingku.com',
+              changeOrigin: true,
+              pathRewrite: { '^/proxy': '' },
             }
         },
         // proxy: {
